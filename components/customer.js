@@ -29,23 +29,24 @@ async function manageCustomers() {
 
 async function createCustomer() {
   console.log("\n Create customer");
-  // const addCustomer = await Customer.create({
-  //   firstName: "john",
-  //   lastName: "Doe",
-  //   email: "john@example.com",
-  //   phoneNumber: "90034563",
-  // });
-  // console.log("\n✅ customer added:", addCustomer.toJSON());
+  const addCustomer = await Customer.create({
+    firstName: "john",
+    lastName: "Doe",
+    email: "john@example.com",
+    phoneNumber: "90034563",
+  });
+  console.log("\n✅ customer added:", addCustomer.toJSON());
 }
 
 async function listCustomers() {
   console.log("\n📋 Customers list:");
-  // const Customers = await Customer.findAll({});
-  // Customers.forEach((cu) =>
-  //   console.log(
-  //     `${cu.firstName} | ${cu.lastName} | ${cu.email} | ${cu.phoneNumber}`
-  //   )
-  // );
+  const Customers = await Customer.findAll({});
+  Customers.forEach((cu) =>
+    console.log(
+      // @ts-ignore
+      `${cu.firstName} | ${cu.lastName} | ${cu.email} | ${cu.phoneNumber}`
+    )
+  );
 }
 
 module.exports = {
