@@ -50,19 +50,19 @@ async function createReservation() {
   });
   console.log("\n✅ Reservation added:", addReservation.toJSON());
 }
-
+// sylvie part
 async function listReservations() {
   console.log("\n List resevation");
 }
-
+// romuald part
 async function viewReservation() {
   console.log("\n View resevation");
 }
-
+// sylvie part
 async function updateReservation() {
   console.log("\n Update resevation");
 }
-
+// romuald part
 async function deleteReservation() {
   console.log("\n Delete resevation");
 }
