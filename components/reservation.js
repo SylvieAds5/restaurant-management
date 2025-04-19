@@ -1,64 +1,72 @@
 // Add function to manage reservations
-const { Reservation } = require('../models');
-const { ask } = require('./common');
+const { Reservation } = require("../models");
+const { ask } = require("./common");
+const now = new Date();
 
 async function manageReservations() {
-    console.log('\n--- Manage Reservations ---');
-    console.log('1. Create a Reservation');
-    console.log('2. List Reservations');
-    console.log('3. Detail of a reservation');
-    console.log('4. Update a reservation');
-    console.log('5. Delete a reservation');
-    console.log('6. Back to main menu');
-  
-    const choice = await ask('Your choice: ');
-  
-    switch (choice) {
-        case '1': {
-            await createReservation();
-            break;
-        }
-        case '2':
-            await listReservations();
-            break;
-        case '3':
-            await viewReservation();
-            break;
-        case '4':
-            await updateReservation();
-            break;
-        case '5':
-            await deleteReservation();
-            break;
-        case '6':
-            return;
-        default:
-            console.log('❌ Invalid option.');
+  console.log("\n--- Manage Reservations ---");
+  console.log("1. Create a Reservation");
+  console.log("2. List Reservations");
+  console.log("3. Detail of a reservation");
+  console.log("4. Update a reservation");
+  console.log("5. Delete a reservation");
+  console.log("6. Back to main menu");
+
+  const choice = await ask("Your choice: ");
+
+  switch (choice) {
+    case "1": {
+      await createReservation();
+      break;
     }
-  
-    await manageReservations(); // Repeat submenu
+    case "2":
+      await listReservations();
+      break;
+    case "3":
+      await viewReservation();
+      break;
+    case "4":
+      await updateReservation();
+      break;
+    case "5":
+      await deleteReservation();
+      break;
+    case "6":
+      return;
+    default:
+      console.log("❌ Invalid option.");
+  }
+
+  await manageReservations(); // Repeat submenu
 }
 
 async function createReservation() {
-    console.log('\n Create resevation');
+  console.log("\n Create resevation");
+  const addReservation = await Reservation.create({
+    date: now.toLocaleDateString("fr-FR"),
+    menuId: 1,
+    tableId: 1,
+    customerId: 1,
+  });
+  console.log("\n✅ Reservation added:", addReservation.toJSON());
 }
 
 async function listReservations() {
-    console.log('\n List resevation');
+  console.log("\n List resevation");
 }
 
 async function viewReservation() {
-    console.log('\n View resevation');
+  console.log("\n View resevation");
 }
 
 async function updateReservation() {
-    console.log('\n Update resevation');
+  console.log("\n Update resevation");
 }
 
 async function deleteReservation() {
-    console.log('\n Delete resevation');
+  console.log("\n Delete resevation");
 }
 
 module.exports = {
-    manageReservations
+  manageReservations,
 };

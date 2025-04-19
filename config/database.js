@@ -1,10 +1,10 @@
 // The connexion to the database
-const { Sequelize } = require('sequelize');
+const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize('todolist', 'postgres', 'postgres', {
-  host: 'localhost',
-  dialect: 'postgres',
-  logging: false // quiet mode
+const sequelize = new Sequelize("restaurantdb", "postgres", "TOOR", {
+  host: "localhost",
+  dialect: "postgres",
+  logging: false, // quiet mode
 });
 
 module.exports = sequelize;
