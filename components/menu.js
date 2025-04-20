@@ -60,7 +60,6 @@ async function listMenus() {
 
 async function viewMenu() {
   console.log("\n View menu");
-  console.log("\n List menus");
   const menuList = await Menu.findAll({});
   menuList.forEach((cu) =>
     // @ts-ignore
