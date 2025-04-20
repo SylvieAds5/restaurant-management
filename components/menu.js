@@ -54,6 +54,7 @@ async function createMenu() {
 async function listMenus() {
   console.log("\n List menus");
   const menuList = await Menu.findAll({});
+  // @ts-ignore
   menuList.forEach((cu) => console.log(`${cu.name}`));
 }
 
@@ -62,6 +63,7 @@ async function viewMenu() {
   console.log("\n List menus");
   const menuList = await Menu.findAll({});
   menuList.forEach((cu) =>
+    // @ts-ignore
     console.log(`${cu.name} | ${cu.description} | ${cu.day} | ${cu.price}`)
   );
 }

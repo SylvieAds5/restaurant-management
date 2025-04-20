@@ -1,5 +1,6 @@
 // Add function to manage reservations
-const { Reservation } = require("../models");
+const { Model } = require("sequelize");
+const { Reservation, Menu, Table, Customer } = require("../models");
 const { ask } = require("./common");
 const now = new Date();
 
@@ -57,6 +58,21 @@ async function listReservations() {
 // romuald part
 async function viewReservation() {
   console.log("\n View resevation");
+  const reservationView = await Reservation.findAll({
+    attributes: ["date"],
+    include: [
+      { model: Menu, attributes: ["name"] },
+      { model: Table, attributes: ["name"] },
+      { model: Customer, attributes: ["firstname"] },
+    ],
+  });
+
+  reservationView.forEach((cu) =>
+    console.log(
+      // @ts-ignore
+      `${cu.date} | ${cu.menu?.name} | ${cu.table?.name} | ${cu.customer?.firstname}`
+    )
+  );
 }
 // sylvie part
 async function updateReservation() {
@@ -65,6 +81,10 @@ async function updateReservation() {
 // romuald part
 async function deleteReservation() {
   console.log("\n Delete resevation");
+  const remove = await Reservation.destroy({ where: { id: 1 } });
+  remove
+    ? console.log(`la reservation à été supprimée`)
+    : console.log(`erreur lors de la suppression  de la reservation`);
 }
 
 module.exports = {

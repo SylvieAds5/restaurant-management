@@ -33,6 +33,9 @@ async function createTable() {
 // romuald
 async function listTables() {
   console.log("\n List tables");
+  const tableList = await Table.findAll({});
+  // @ts-ignore
+  tableList.forEach((cu) => console.log(`${cu?.name} | ${cu?.description}`));
 }
 
 module.exports = {
