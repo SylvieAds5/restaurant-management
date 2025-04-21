@@ -44,7 +44,7 @@ async function manageReservations() {
 async function createReservation() {
   console.log("\n Create resevation");
   const addReservation = await Reservation.create({
-    date: now.toLocaleDateString("fr-FR"),
+    date: now.toISOString(),
     menuId: 1,
     tableId: 1,
     customerId: 1,
@@ -55,6 +55,28 @@ async function createReservation() {
 async function listReservations() {
   console.log("\n List resevation");
 }
+async function updateReservation() {
+  console.log("\n Update reservation");
+
+  const id = await ask(" Entrez l'ID de la réservation à modifier : ");
+  const newDate = await ask(" Nouvelle date (format JJ/MM/AAAA) : ");
+
+  try {
+    const [updated] = await Reservation.update(
+      { date: newDate },
+      { where: { id: id } }
+    );
+
+    if (updated > 0) {
+      console.log(`La réservation avec l'id ${id} a été mise à jour.`);
+    } else {
+      console.log(`Aucune réservation trouvée avec l'id ${id}.`);
+    }
+  } catch (error) {
+    console.log(` Erreur lors de la mise à jour :`, error.message);
+  }
+}
+
 // romuald part
 async function viewReservation() {
   console.log("\n View resevation");
@@ -76,8 +98,32 @@ async function viewReservation() {
 }
 // sylvie part
 async function updateReservation() {
-  console.log("\n Update resevation");
+  console.log;
 }
+async function updateReservation() {
+  console.log("\n Update reservation");
+
+  const id = await ask(" Enter the ID of the reservation to update: ");
+  const newDate = await ask(" New date (DD/MM/YYYY): ");
+
+  try {
+    const [updated] = await Reservation.update(
+      { date: newDate },
+      { where: { id: id } }
+    );
+
+    if (updated > 0) {
+      console.log(` Reservation with ID ${id} has been updated.`);
+    } else {
+      console.log(` No reservation found with ID ${id}.`);
+    }
+  } catch (error) {
+    console.log(` Error updating reservation:`, error.message);
+  }
+}
+
+
+
 // romuald part
 async function deleteReservation() {
   console.log("\n Delete resevation");

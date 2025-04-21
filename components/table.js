@@ -29,7 +29,24 @@ async function manageTables() {
 // sylvie
 async function createTable() {
   console.log("\n Create table");
-}
+  
+    const name = await ask("Enter the name of the table: ");
+    const description = await ask(" Enter a description of the table: ");
+  
+    try {
+      const newTable = await Table.create({
+        name: name,
+        description: description,
+
+      });
+  
+      console.log(` Table "${newTable.name}" has been created.`);
+    } catch (error) {
+      console.log(` Error creating the table:`, error.message);
+    }
+  }
+  
+
 // romuald
 async function listTables() {
   console.log("\n List tables");
