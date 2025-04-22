@@ -52,9 +52,6 @@ async function createReservation() {
   console.log("\n✅ Reservation added:", addReservation.toJSON());
 }
 // sylvie part
-async function listReservations() {
-  console.log("\n List resevation");
-}
 async function updateReservation() {
   console.log("\n Update reservation");
 
@@ -97,9 +94,7 @@ async function viewReservation() {
   );
 }
 // sylvie part
-async function updateReservation() {
-  console.log;
-}
+
 async function updateReservation() {
   console.log("\n Update reservation");
 
