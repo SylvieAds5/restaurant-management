@@ -54,22 +54,12 @@ async function createReservation() {
 // sylvie part
 async function listReservations() {
   console.log("\n Liste des réservations");
-  const reservations = await Reservation.findAll({
-    attributes: ["id", "date"],
-    include: [
-      { model: Menu, attributes: ["name"] },
-      { model: Table, attributes: ["name"] },
-      { model: Customer, attributes: ["firstname"] },
-    ],
-  });
+  const reservations = await Reservation.findAll();
 
   reservations.forEach((reservation) => {
-    console.log(
-      `${reservation.id} | ${reservation.date} | ${reservation.menu?.name} | ${reservation.table?.name} | ${reservation.customer?.firstname}`
-    );
+    console.log(`  ${reservation.date} | ${reservation.menuiId} |`);
   });
 }
-
 
 // romuald part
 async function viewReservation() {
@@ -97,14 +87,15 @@ async function updateReservation() {
 
   const id = await ask(" Enter the ID of the reservation to update: ");
   const newDate = await ask(" New date (DD/MM/YYYY): ");
+  const dateParse = new Date(newDate);
 
   try {
     const [updated] = await Reservation.update(
-      { date: newDate },
+      { date: dateParse },
       { where: { id: id } }
     );
 
-    if (updated > 0) {
+    if (updated) {
       console.log(` Reservation with ID ${id} has been updated.`);
     } else {
       console.log(` No reservation found with ID ${id}.`);
@@ -113,8 +104,6 @@ async function updateReservation() {
     console.log(` Error updating reservation:`, error.message);
   }
 }
-
-
 
 // romuald part
 async function deleteReservation() {
