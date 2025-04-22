@@ -52,27 +52,24 @@ async function createReservation() {
   console.log("\n✅ Reservation added:", addReservation.toJSON());
 }
 // sylvie part
-async function updateReservation() {
-  console.log("\n Update reservation");
+async function listReservations() {
+  console.log("\n Liste des réservations");
+  const reservations = await Reservation.findAll({
+    attributes: ["id", "date"],
+    include: [
+      { model: Menu, attributes: ["name"] },
+      { model: Table, attributes: ["name"] },
+      { model: Customer, attributes: ["firstname"] },
+    ],
+  });
 
-  const id = await ask(" Entrez l'ID de la réservation à modifier : ");
-  const newDate = await ask(" Nouvelle date (format JJ/MM/AAAA) : ");
-
-  try {
-    const [updated] = await Reservation.update(
-      { date: newDate },
-      { where: { id: id } }
+  reservations.forEach((reservation) => {
+    console.log(
+      `${reservation.id} | ${reservation.date} | ${reservation.menu?.name} | ${reservation.table?.name} | ${reservation.customer?.firstname}`
     );
-
-    if (updated > 0) {
-      console.log(`La réservation avec l'id ${id} a été mise à jour.`);
-    } else {
-      console.log(`Aucune réservation trouvée avec l'id ${id}.`);
-    }
-  } catch (error) {
-    console.log(` Erreur lors de la mise à jour :`, error.message);
-  }
+  });
 }
+
 
 // romuald part
 async function viewReservation() {
